@@ -55,10 +55,19 @@ img {
 .app {
   width: 100%;
   padding: 4rem 1.5rem;
+  display: grid;
+  grid-template:
+    "Pr"
+    "Wo"
+    "Pl"
+    "St"
+    "Ex"
+    "So"
+    "SC";
+  grid-row-gap: 1.5rem;
 
   @media (min-width: 600px) {
-    display: grid;
-    grid-column-gap: 2rem;
+    grid-column-gap: 1.5rem;
     grid-template:
       "Pr Pr"
       "Wo Pl"
@@ -71,9 +80,7 @@ img {
   color: var(--pale-blue);
 }
 .profile {
-  position: relative;
   grid-area: Pr;
-  margin-bottom: calc(1.5rem + 8.2rem + 1.5rem);
   &__header {
     position: relative;
     z-index: 2;
@@ -101,11 +108,6 @@ img {
   }
 
   &__timeframes {
-    position: absolute;
-    width: 100%;
-    bottom: -6.2rem;
-    left: 0;
-
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 0 1rem;
@@ -114,9 +116,19 @@ img {
     color: var(--desaturated-blue);
     background-color: var(--dark-blue);
     border-radius: 0 0 1.5rem 1.5rem;
-    padding: 3rem 0rem 2rem 0rem;
+    margin-top: -1rem;
+
+		& a {
+			width: 100%;
+			text-align: center;
+			padding: 3rem 0 2rem;
+		}
 
     & a:hover {
+      color: var(--white);
+    }
+
+    & a.active {
       color: var(--white);
     }
   }
@@ -128,23 +140,14 @@ img {
   }
 }
 .card {
-  position: relative;
-  &:not(:last-child) {
-    margin-bottom: 5rem;
-  }
-
   &__topframe {
-    position: absolute;
-    top: -3.5rem;
-    left: 0;
-    width: 100%;
     height: 6rem;
     background-repeat: no-repeat;
     background-position: 90% -0.8rem;
-		background-size: contain;
+    background-size: contain;
     border-radius: 1.5rem 1.5rem 0 0;
+    margin-bottom: -3rem;
   }
-
   &__content {
     position: relative;
     z-index: 2;
@@ -152,6 +155,10 @@ img {
     border-radius: 1.5rem;
     background-color: var(--dark-blue);
     padding: 2rem;
+
+    &:hover {
+      background-color: var(--desaturated-blue);
+    }
   }
   &__header {
     display: flex;
@@ -167,6 +174,9 @@ img {
   &__img {
     & img {
       vertical-align: middle;
+    }
+    &:hover {
+      filter: brightness(0) invert(1);
     }
   }
 
@@ -242,6 +252,7 @@ img {
     align-content: center;
     justify-content: center;
     padding: 0 1.5rem;
+    gap: 2rem 2rem;
     grid-template:
       "Pr Wo Pl St"
       "Pr Ex So SC";
@@ -249,7 +260,7 @@ img {
   .profile {
     &__header {
       grid-template-columns: none;
-      grid-template-rows: 1fr 1.8fr;
+      grid-template-rows: 1fr 1.9fr;
     }
     &__header-avatar {
       width: 40%;
@@ -257,29 +268,26 @@ img {
     }
     &__header-name {
       align-self: start;
+      font-size: 3rem;
     }
     &__timeframes {
       grid-template-columns: none;
       grid-template-rows: repeat(3, 1fr);
-      justify-content: start;
+      justify-content: stretch;
       justify-items: start;
       gap: 1rem 0;
       bottom: -11.2rem;
-      padding: 4rem 2rem 2rem;
+      padding: 3rem 2rem 2rem;
+			& a {
+				text-align: left;
+				padding: 0;
+			}
     }
   }
   .card {
-    &:not(:last-child) {
-      margin-bottom: 0rem;
+    &__topframe {
+      height: 6rem;
     }
-    &:nth-child(n + 2):nth-child(-n + 4) {
-      margin-top: 2.5rem;
-      margin-bottom: 4.5rem;
-    }
-		&__topframe {
-			height: 5rem;
-			top: -2.5rem;
-		}
     &__header {
       margin-bottom: 1rem;
     }
