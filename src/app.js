@@ -1,66 +1,84 @@
-function getJSON() {
+function getJSON(timeframe) {
 	fetch("/data.json").then(response => response.json())
-		.then(data => showInfo(data));
+		.then(data => showCardsInfo(data, timeframe));
 };
-getJSON();
-
-let work, play, study, exercise, social, selfCare;
-
-// Показывает изначальную инормацию
-function showInfo(data) {
-	[work, play, study, exercise, social, selfCare] = data;
-
-	// нужно для каждого блока
-	let cardWork = document.querySelector('.work');
-	cardWork.querySelector('.card__title').textContent = `${work.title}`;
-	cardWork.querySelector('.card__hours-current').textContent = `${work.timeframes.weekly.current}`;
-	cardWork.querySelector('.card__hours-last').textContent = `Last Week - ${work.timeframes.weekly.previous}`;
-
-};
-
-// function changeInfo(timeframe) {
-// 	let [work, play, study, exercise, social, selfCare] = data;
-// 	let cardWork = document.querySelector('.work');
-// 	cardWork.querySelector('.card__hours-current').textContent = `${work.timeframes.timeframe.current}`;
-// 	cardWork.querySelector('.card__hours-last').textContent = `Last Week - ${work.timeframes.timeframe.previous}`;
-// }
+getJSON('weekly');
 
 
-// Проверяет текущий временной промежуток
-function checkTimeframe() {
-	let timeframe = document.querySelector('.profile__timeframes > .active').id;
-	return timeframe;
-};
+function showCardsInfo(data, timeframe) {
+	let app = document.querySelector('.app');
 
-document.querySelector('.profile__timeframes').addEventListener('click', changeTimeframe);
-
-// Меняет временной промежуток
-function changeTimeframe(e) {
-	if ('.profile__timeframes-link.active') {
-		document.querySelector('.profile__timeframes-link.active').classList.remove('active')
+	// Delete all cards (!profile) before adding new cards
+	while (app.childNodes.length > 1) {
+		app.removeChild(app.lastChild);
 	}
+
+	// Adding cards and their content
+	data.forEach(activity => {
+		let cssClass = activity.title.toLowerCase().replace(' ', '-');
+		let currentHours = activity.timeframes[timeframe].current;
+		let previousHours = activity.timeframes[timeframe].previous;
+
+		app.insertAdjacentHTML('beforeend', `
+			<section class="card ${cssClass}">
+				<div class="card__topframe"></div>
+				<div class="card__content">
+					<div class="card__header">
+						<p class="card__title">${activity.title}</p>
+						<div class="card__img">
+							<img src="img/icon-ellipsis.svg" alt="img">
+						</div>
+					</div>
+					<div class="card__hours">
+						<div class="card__hours-current">${currentHours}</div>
+						<div class="card__hours-last"> ${checkTimeframe(timeframe)} ${previousHours}</div>
+					</div>
+				</div>
+			</section>
+		`)
+	})
+};
+
+// Check current timeframe
+function checkTimeframe(timeframe) {
+	switch (timeframe) {
+		case 'daily': return "Last Day - ";
+		case 'weekly': return "Last Week - ";
+		case 'monthly': return "Last Month - ";
+	}
+};
+
+// Change timeframe and cards content
+document.querySelector('.profile__timeframes').addEventListener('click', function (e) {
 	if (e.target.closest('.profile__timeframes-link')) {
+		e.preventDefault();
+
+		document.querySelector('.profile__timeframes-link.active').classList.remove('active')
 		e.target.classList.add('active');
+	} else {
+		return false;
+	};
 
-		switch (checkTimeframe()) {
-			case 'daily': 
-			// [work, play, study, exercise, social, selfCare] = data;
-			let cardWork = document.querySelector('.work');
-			cardWork.querySelector('.card__hours-current').textContent = `${work.timeframes.daily.current}`;
-			cardWork.querySelector('.card__hours-last').textContent = `Last Day - ${work.timeframes.daily.previous}`;
+	let timeframe = document.querySelector('.profile__timeframes > .active').id;
+	checkTimeframe(timeframe);
 
-				break;
+	getJSON(timeframe);
+	return false;
+});
 
-			case 'weekly':
 
-				break;
+// Hover effects on cards and on elipsis into cards
+document.querySelector('.app').addEventListener('mouseover', function (e) {
+	if (e.target.closest('.card__content')) {
+		e.target.closest('.card__content').classList.add('hover');
 
-			case 'monthly':
-
-				break;
-
-			default:
-				break;
+		if (e.target.closest('.card__img')) {
+			e.target.closest('.card__content').classList.remove('hover')
 		}
 	};
-};
+});
+document.querySelector('.app').addEventListener('mouseout', function (e) {
+	if (e.target.closest('.card__content')) {
+		e.target.closest('.card__content').classList.remove('hover')
+	}
+})

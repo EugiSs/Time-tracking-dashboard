@@ -145,7 +145,7 @@ img {
   background-color: var(--dark-blue);
   padding: 2rem;
 }
-.card__content:hover {
+.card__content.hover {
   background-color: var(--desaturated-blue);
 }
 .card__header {
