@@ -30,8 +30,8 @@ function showCardsInfo(data, timeframe) {
 						</div>
 					</div>
 					<div class="card__hours">
-						<div class="card__hours-current">${currentHours}</div>
-						<div class="card__hours-last"> ${checkTimeframe(timeframe)} ${previousHours}</div>
+						<div class="card__hours-current">${currentHours}hrs</div>
+						<div class="card__hours-last"> ${checkTimeframe(timeframe)} ${previousHours}hrs</div>
 					</div>
 				</div>
 			</section>
