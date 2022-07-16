@@ -250,7 +250,7 @@ img {
   }
   .app {
     & > * {
-      width: 18rem;
+      width: 25rem;
     }
     align-content: center;
     justify-content: center;
@@ -263,7 +263,7 @@ img {
   .profile {
     &__header {
       grid-template-columns: none;
-      grid-template-rows: 1fr 1.9fr;
+      grid-template-rows: 1fr 1.5fr;
     }
     &__header-avatar {
       width: 40%;
@@ -278,7 +278,7 @@ img {
       grid-template-rows: repeat(3, 1fr);
       justify-content: stretch;
       justify-items: start;
-      gap: 1rem 0;
+      gap: 2rem 0;
       bottom: -11.2rem;
       padding: 3rem 2rem 2rem;
 			& a {
@@ -289,8 +289,11 @@ img {
   }
   .card {
     &__topframe {
-      height: 6rem;
+      height: 7rem;
     }
+		&__content {
+			padding: 3rem;
+		}
     &__header {
       margin-bottom: 1rem;
     }
