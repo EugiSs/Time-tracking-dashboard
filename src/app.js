@@ -1,5 +1,5 @@
 function getJSON(timeframe) {
-	fetch("/data.json").then(response => response.json())
+	fetch("data.json").then(response => response.json())
 		.then(data => showCardsInfo(data, timeframe));
 };
 getJSON('weekly');
