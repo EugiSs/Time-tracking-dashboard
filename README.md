@@ -15,7 +15,7 @@ Users should be able to:
 
 ### Links
 
-- [Live Site URL](https://evgiss.github.io/Time-tracking-dashboard/)
+- [Live Site URL](https://eugiss.github.io/Time-tracking-dashboard/)
 
 ### Built with
 
@@ -28,5 +28,5 @@ Users should be able to:
 
 ## Author
 
-- Website - [EvgiSs](https://github.com/EvgiSs)
-- Frontend Mentor - [Evgi](https://www.frontendmentor.io/profile/EvgiSs)
+- Website - [EvgiSs](https://github.com/EugiSs)
+- Frontend Mentor - [Evgi](https://www.frontendmentor.io/profile/EugiSs)
