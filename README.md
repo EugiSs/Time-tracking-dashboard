@@ -28,5 +28,5 @@ Users should be able to:
 
 ## Author
 
-- Website - [EvgiSs](https://github.com/EugiSs)
-- Frontend Mentor - [Evgi](https://www.frontendmentor.io/profile/EugiSs)
+- Website - [EugiSs](https://github.com/EugiSs)
+- Frontend Mentor - [Eugi](https://www.frontendmentor.io/profile/EugiSs)
